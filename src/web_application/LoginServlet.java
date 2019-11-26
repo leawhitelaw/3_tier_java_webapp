@@ -42,9 +42,7 @@ public class LoginServlet extends HttpServlet {
     	Cookie username_cookie = new Cookie("username", username);
     	username_cookie.setMaxAge(60*10); //store cookie for 10 mins
     	response.addCookie(username_cookie);
-    	
-    	Employee f = employeeData.getEmployee(12345, "password");
-    	System.out.println("lie but why ??" + f);
+ 
     	Employee e = employeeData.getEmployee(Integer.parseInt(username), password);
     	if(e!= null && e.getEmployeeID()!= null) {
     		if(e.getAccessLevel() == 1) {
@@ -52,8 +50,7 @@ public class LoginServlet extends HttpServlet {
         		request.getRequestDispatcher("analytics.jsp").forward(request, response);
     		}
     		else if(e.getAccessLevel() == 2) {
-    			request.setAttribute("message", e.getEmployeeName());
-        		request.getRequestDispatcher("priceList.jsp").forward(request, response);
+    			response.sendRedirect("priceList");
     		}
     		else if(e.getAccessLevel() == 3) {
     			request.setAttribute("message", e.getEmployeeName());
@@ -83,8 +80,8 @@ public class LoginServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-//	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("login.jsp").forward(request, response);
+	}
 }

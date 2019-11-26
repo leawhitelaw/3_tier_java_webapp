@@ -6,7 +6,14 @@ public class Employee {
 	private Integer AccessLevel;
 	private String employeeName;
 	private String password;
+	private Integer storeID;
 	
+	public Integer getStoreID() {
+		return storeID;
+	}
+	public void setStoreID(Integer storeID) {
+		this.storeID = storeID;
+	}
 	public Integer getEmployeeID() {
 		return employeeID;
 	}
