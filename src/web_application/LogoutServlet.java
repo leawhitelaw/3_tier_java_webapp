@@ -37,7 +37,7 @@ public class LogoutServlet extends HttpServlet {
 			PrintWriter writer = response.getWriter();
 			writer.println("<html><body>");
 			writer.println("<p>You have logged out.</p>");
-			writer.println("<p><a href=\"login.html\">Return </a> to login page");
+			writer.println("<p><a href=\"login.jsp\">Return </a> to login page");
 			writer.println("</body><html>");
 			writer.close();
 		}catch(Exception e) {
