@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
     		else if(e.getAccessLevel() == 2) {
     			try {
         			session.setAttribute("storeid", e.getStoreID());
-        			response.sendRedirect("/software_architecture_cw/store/products");
+        			response.sendRedirect("/software_architecture_cw/store");
     				
     			}catch(Exception exc) {
     				exc.printStackTrace();

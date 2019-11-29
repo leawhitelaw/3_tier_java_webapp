@@ -11,6 +11,18 @@
 <title>Stock Item</title>
 </head>
 <div class="container">
+<c:choose>
+	<c:when test="${nullParams == 'yes'}">
+		<div class="alert alert-danger" role="alert">
+			Please give field a value over 0
+		</div>
+	</c:when>
+	<c:when test="${orderedQty != null}">
+		<div class="alert alert-success" role="alert">
+			${orderedQty} item(s) have been ordered.
+		</div>
+	</c:when>
+</c:choose>
 <h1>Product: ${item.getProductName()}</h1>
 <h4> Product ID: ${item.getProductID()}</h4>
 <form action="/software_architecture_cw/store/stock/item" method="POST">

@@ -11,6 +11,18 @@
 <title>Product</title>
 </head>
 <div class="container">
+<c:choose>
+	<c:when test="${nullParams == 'yes'}">
+		<div class="alert alert-danger" role="alert">
+			Please input/select valid field values
+		</div>
+	</c:when>
+	<c:when test="${updatedPrice != null}">
+		<div class="alert alert-success" role="alert">
+			New price of ${updatedPrice} has been set.
+		</div>
+	</c:when>
+</c:choose>
 <h1>Product: ${product.getProductName()}</h1>
 <h4> Product ID: ${product.getProductID()}</h4>
 <form action="/software_architecture_cw/store/products/product" method="POST">

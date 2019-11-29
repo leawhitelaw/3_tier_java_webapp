@@ -3,7 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<style><%@include file="css/bootstrap.min.css"%></style>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js">
+</script>
 <title>Welcome</title>
 </head>
 <body>

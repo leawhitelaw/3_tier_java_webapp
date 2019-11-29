@@ -41,9 +41,11 @@ public class StockDisplayServlet extends HttpServlet {
 				request.setAttribute("item", storeItem);
 				System.out.println(storeItem.getProductName());
 				System.out.println(storeItem.getProductID());
+				request.setAttribute("nullParams", session.getAttribute("nullParams"));
+				request.setAttribute("orderedQty", session.getAttribute("orderedQty"));
 				request.getRequestDispatcher("/StockDisplay.jsp").forward(request, response);
-				
-				
+				session.removeAttribute("nullParams");
+				session.removeAttribute("orderedQty");
 				
 			}else {
 				response.sendRedirect("/software_architecture_cw/store/stock");
@@ -69,8 +71,9 @@ public class StockDisplayServlet extends HttpServlet {
 			String newqty = request.getParameter("orderstock");
 			
 			//check that no fields are null
-			if(newqty == "" || newqty == " " || Integer.parseInt(newqty) == 0) {
-				JOptionPane.showMessageDialog(null, "Please give field a value over 0");
+			if(newqty == null || newqty == "" || newqty == " " || Integer.parseInt(newqty) == 0) {
+				String nullParams = "yes";
+				session.setAttribute("nullParams", nullParams);
 				response.sendRedirect("/software_architecture_cw/store/stock/item?id=" + productid);
 			}
 			else {
@@ -78,9 +81,9 @@ public class StockDisplayServlet extends HttpServlet {
 				Integer quantity = Integer.parseInt(newqty);
 				Integer curQuantity = curStoreItem.getQuantity();
 				Integer updatedQuantity = quantity + curQuantity;
-				String outputString = String.format("%d item(s) have been ordered", quantity);
-				JOptionPane.showMessageDialog(null, outputString);
 				storeDAOImpl.updateQuantity(store, productid, updatedQuantity);
+				session.setAttribute("orderedQty", quantity);
+				
 				//redirect to same page
 				response.sendRedirect("/software_architecture_cw/store/stock/item?id=" + productid);
 			}

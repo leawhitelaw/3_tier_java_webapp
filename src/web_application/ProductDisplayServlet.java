@@ -44,10 +44,11 @@ public class ProductDisplayServlet extends HttpServlet {
 				ProductPrice pp = new ProductPrice();
 				pp = ppDAOImpl.getProductPrice(productid, store);
 				request.setAttribute("product", pp);
+				request.setAttribute("nullParams", session.getAttribute("nullParams"));
+				request.setAttribute("orderedQty", session.getAttribute("orderedQty"));
 				request.getRequestDispatcher("/productDisplay.jsp").forward(request, response);
-				
-				
-				
+				session.removeAttribute("nullParams");
+				session.removeAttribute("updatedPrice");
 			}else {
 				response.sendRedirect("/software_architecture_cw/store/products");
 			}
@@ -76,14 +77,16 @@ public class ProductDisplayServlet extends HttpServlet {
 			String deal = request.getParameter("deal");
 			
 			//check that no fields are null
-			if(price == "" || price == " " || deal == "" || deal == " ") {
-				JOptionPane.showMessageDialog(null, "Please do not leave fields null");
+			if(price == "" || price == " " || deal == "" || deal == " " || price == null || deal == null) {
+				String nullParams = "yes";
+				session.setAttribute("nullParams", nullParams);
 				response.sendRedirect("/software_architecture_cw/store/products/product?id=" + productid);
 			}
 			else {
 				//update productPrice info
 				Integer newprice = Integer.parseInt(price);
 				ppDAOImpl.updateProductPrice(pp, newprice, deal);
+				session.setAttribute("updatedPrice", newprice);
 				//redirect to same page
 				response.sendRedirect("/software_architecture_cw/store/products/product?id=" + productid);
 			}
