@@ -51,27 +51,6 @@ public class ProductPriceDAOImpl implements ProductPriceDAO {
 		return pp;
 	}
 	
-//	public static List<ProductPrice> getProductPrices(){
-//		List<ProductPrice> productPrices = new ArrayList<ProductPrice>();
-//		try {
-//			conn = DatabaseConnector.getStoresCon();
-//			ps = conn.prepareStatement("select * from productprice");
-//			ResultSet rs = ps.executeQuery();
-//			while(rs.next()) {
-//				ProductPrice pp = new ProductPrice();
-//				pp.setProductID(rs.getInt(1));
-//				pp.setStoreID(rs.getInt(2));
-//				pp.setPrice(rs.getInt(3));
-//				productPrices.add(pp);
-//				
-//			}
-//			
-//		}catch(Exception er) {
-//			er.printStackTrace();
-//		}
-//		return productPrices;
-//	}
-	
 	public static List<ProductPrice> getProducts(Integer storeID) {
 		List<ProductPrice> products = new ArrayList<ProductPrice>();
 		try {

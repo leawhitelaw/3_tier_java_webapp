@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
 
 import web_application.data_layer.StoreInventory;
 import web_application.data_layer.StoreInventoryDAOImpl;
@@ -43,7 +42,7 @@ public class StockDisplayServlet extends HttpServlet {
 				System.out.println(storeItem.getProductID());
 				request.setAttribute("nullParams", session.getAttribute("nullParams"));
 				request.setAttribute("orderedQty", session.getAttribute("orderedQty"));
-				request.getRequestDispatcher("/StockDisplay.jsp").forward(request, response);
+				request.getRequestDispatcher("/dealView.jsp").forward(request, response);
 				session.removeAttribute("nullParams");
 				session.removeAttribute("orderedQty");
 				
