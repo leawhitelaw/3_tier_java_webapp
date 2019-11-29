@@ -1,5 +1,7 @@
 package web_application.data_layer;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDAOImpl implements ProductDAO {
 	
@@ -50,6 +52,27 @@ public class ProductDAOImpl implements ProductDAO {
 		 * Here possibly pass in an old product and a new product?? IDK come back later lmao
 		 * */
 
+	}
+	
+	public static List<Product> getProducts(){
+		List<Product> products = new ArrayList<Product>();
+		try {
+			conn = DatabaseConnector.getStoresCon();
+			ps = conn.prepareStatement("select * from product");
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Product p = new Product();
+				p.setProductID(rs.getInt(1));
+				p.setProductName(rs.getString(2));
+				p.setRrp(rs.getInt(3));
+				products.add(p);
+				
+			}
+			
+		}catch(Exception er) {
+			er.printStackTrace();
+		}
+		return products;
 	}
 
 }

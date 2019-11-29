@@ -12,20 +12,19 @@ public class ProductPriceDAOImpl implements ProductPriceDAO {
 	static PreparedStatement ps;
 
 	@Override
-	public int insertProductPrice(ProductPrice p, Integer price) {
-		int status =0;
+	public void updateProductPrice(ProductPrice p, Integer price, String deal) {
 		try {
 			conn = DatabaseConnector.getStoresCon();
-			ps = conn.prepareStatement("update productprice set price = ? where storeid = ? and productid = ?");
+			ps = conn.prepareStatement("update productprice set price = ?, deal = ? where storeid = ? and productid = ?");
 			ps.setInt(1, price);
-			ps.setInt(2, p.getStoreID());
-			ps.setInt(3, p.getProductID());
-			status = ps.executeUpdate();
+			ps.setString(2, deal);
+			ps.setInt(3, p.getStoreID());
+			ps.setInt(4, p.getProductID());
+			ps.executeUpdate();
 			
 		}catch(Exception er) {
 			er.printStackTrace();
 		}
-		return status;
 	}
 	
 	@Override
@@ -33,14 +32,17 @@ public class ProductPriceDAOImpl implements ProductPriceDAO {
 		ProductPrice pp = new ProductPrice();
 		try {
 			conn = DatabaseConnector.getStoresCon();
-			ps = conn.prepareStatement("select * from productprice where productid=? and storeid=?");
-			ps.setInt(1, productID);
-			ps.setInt(2, storeID);
+			ps = conn.prepareStatement("SELECT Product.ProductID, Product.ProductName, Product.RRP, ProductPrice.Price, ProductPrice.StoreID,  ProductPrice.Deal FROM Product LEFT JOIN ProductPrice on ProductPrice.ProductID = Product.ProductID WHERE StoreID = ? AND Product.ProductID = ?");
+			ps.setInt(2, productID);
+			ps.setInt(1, storeID);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				pp.setProductID(rs.getInt(1));
-				pp.setStoreID(rs.getInt(2));
-				pp.setPrice(rs.getInt(3));
+				pp.setProductName(rs.getString(2));
+				pp.setRrp(rs.getInt(3));
+				pp.setPrice(rs.getInt(4));
+				pp.setStoreID(rs.getInt(5));
+				pp.setDeal(rs.getString(6));
 			}
 			
 		}catch(Exception er) {
@@ -49,25 +51,50 @@ public class ProductPriceDAOImpl implements ProductPriceDAO {
 		return pp;
 	}
 	
-	public static List<ProductPrice> getProductPrices(){
-		List<ProductPrice> productPrices = new ArrayList<ProductPrice>();
+//	public static List<ProductPrice> getProductPrices(){
+//		List<ProductPrice> productPrices = new ArrayList<ProductPrice>();
+//		try {
+//			conn = DatabaseConnector.getStoresCon();
+//			ps = conn.prepareStatement("select * from productprice");
+//			ResultSet rs = ps.executeQuery();
+//			while(rs.next()) {
+//				ProductPrice pp = new ProductPrice();
+//				pp.setProductID(rs.getInt(1));
+//				pp.setStoreID(rs.getInt(2));
+//				pp.setPrice(rs.getInt(3));
+//				productPrices.add(pp);
+//				
+//			}
+//			
+//		}catch(Exception er) {
+//			er.printStackTrace();
+//		}
+//		return productPrices;
+//	}
+	
+	public static List<ProductPrice> getProducts(Integer storeID) {
+		List<ProductPrice> products = new ArrayList<ProductPrice>();
 		try {
 			conn = DatabaseConnector.getStoresCon();
-			ps = conn.prepareStatement("select * from productprice");
+			ps = conn.prepareStatement("SELECT Product.ProductID, Product.ProductName, Product.RRP, ProductPrice.Price, ProductPrice.StoreID, ProductPrice.Deal FROM Product LEFT JOIN ProductPrice on ProductPrice.ProductID = Product.ProductID WHERE StoreID = ?");
+			ps.setInt(1, storeID);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				ProductPrice pp = new ProductPrice();
-				pp.setProductID(rs.getInt(1));
-				pp.setStoreID(rs.getInt(2));
-				pp.setPrice(rs.getInt(3));
-				productPrices.add(pp);
+				ProductPrice p = new ProductPrice();
+				p.setProductID(rs.getInt(1));
+				p.setProductName(rs.getString(2));
+				p.setRrp(rs.getInt(3));
+				p.setPrice(rs.getInt(4));
+				p.setStoreID(rs.getInt(5));
+				p.setDeal(rs.getString(6));
+				products.add(p);
 				
 			}
 			
 		}catch(Exception er) {
 			er.printStackTrace();
 		}
-		return productPrices;
-	}
+		return products;
+		}
 
 }

@@ -5,19 +5,15 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style><%@include file="css/bootstrap.min.css"%></style>
-<title>Price List</title>
+<title>Product List</title>
 <meta charset="UTF-8">
 <div class="container">
 <table class="table table-striped">
-		<caption>Product Pricing</caption>
+		<caption>Products</caption>
 		<thead>
-			<th>ProductID</th>
+			<th>Product ID</th>
 			<th>Product Name</th>
 			<th>Recommended Retail Price</th>
-			<th>Current Price</th>
-			<th>Deal</th>
-			<th></th>
-			<!-- <th>Store</th> -->
 		</thead>
 <tbody>
  <!-- <h2> Product Pricing </h2> -->
@@ -26,9 +22,6 @@
 		<td>${p.productID}</td>
 		<td>${p.productName}</td>
 		<td>${p.rrp}</td>
-		<td>${p.price}</td>
-		<td>${p.deal}</td>
-		<td><a href="products/product?id=${p.productID}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Edit</a></td>
 	</tr>
  </c:forEach>
  </tbody>

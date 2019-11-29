@@ -15,12 +15,12 @@
 	<td>${message}</td>
 	</tr>
 	<td>Please enter username and password:</td>
-	<form action="Login" method="POST">
+	<form action="login" method="POST">
 	<div class="form-group col-xs-5">
 		<p>Username: <input type="text" name="username">
 		<p>Password: <input type="password" name="password">
 	</div>
-	<button type="submit" class="btn btn-info" value="Login">Login</button>
+	<button type="submit" class="btn btn-info" value="login">Login</button>
 	</form>
 	</div>
 </body>

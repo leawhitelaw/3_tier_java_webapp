@@ -1,35 +1,49 @@
 package web_application.data_layer;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ProductPrice {
+	private Integer productID;
+	private String productName;
+	private Integer rrp;
+	private Integer price;
+	private Integer storeID;
+	private String deal;
 	
-	private int productID;
-	private int storeID;
-	private int price;
-	private static List<ProductPrice> productPrices = new ArrayList<ProductPrice>();
-	
-	public int getProductID() {
-		return productID;
+	public String getDeal() {
+		return deal;
 	}
-	public void setProductID(int productID) {
-		this.productID = productID;
+	public void setDeal(String deal) {
+		this.deal = deal;
 	}
-	public int getStoreID() {
-		return storeID;
-	}
-	public void setStoreID(int storeID) {
-		this.storeID = storeID;
-	}
-	public int getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
-	public List<ProductPrice> retrieveProductPrices(){
-		return productPrices;
+	public Integer getStoreID() {
+		return storeID;
+	}
+	public void setStoreID(Integer storeID) {
+		this.storeID = storeID;
+	}
+	
+	public Integer getProductID() {
+		return productID;
+	}
+	public void setProductID(Integer productID) {
+		this.productID = productID;
+	}
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public Integer getRrp() {
+		return rrp;
+	}
+	public void setRrp(Integer rrp) {
+		this.rrp = rrp;
 	}
 
 }

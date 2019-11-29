@@ -1,7 +1,7 @@
 package web_application;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,69 +19,73 @@ import web_application.data_layer.*;
  * if HttpSession doesn't exist it'll create a new one
  * generates dynamic HTML content including a hyperlink for the GetSession servlet
  */
-@WebServlet("/Login")
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+	
     public LoginServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	EmployeeDAO employeeData = new EmployeeDAOImpl();
+    	//get username & password from client
     	String username = request.getParameter("username");
     	String password = request.getParameter("password");
-    	HttpSession session = request.getSession(true);  
     	
+    	//set user in session cookies
+    	HttpSession session = request.getSession(true);
     	session.setAttribute("username", username);
     	session.setAttribute("password", password);
     	Cookie username_cookie = new Cookie("username", username);
     	username_cookie.setMaxAge(60*10); //store cookie for 10 mins
     	response.addCookie(username_cookie);
- 
+    	
+    	//get employee that just logged in
+    	EmployeeDAO employeeData = new EmployeeDAOImpl();
     	Employee e = employeeData.getEmployee(Integer.parseInt(username), password);
+    	
+    
     	if(e!= null && e.getEmployeeID()!= null) {
+    		// staff memeber - basic access (can view but cannot edit) own store
     		if(e.getAccessLevel() == 1) {
-    			request.setAttribute("message", e.getEmployeeName());
-        		request.getRequestDispatcher("analytics.jsp").forward(request, response);
+    			try {
+    				request.setAttribute("message", e.getEmployeeName());
+            		request.getRequestDispatcher("analytics.jsp").forward(request, response);
+    				
+    			}catch(Exception exc) {
+    				exc.printStackTrace();
+    			}
     		}
+    		// manager - can access and edit own store
     		else if(e.getAccessLevel() == 2) {
-    			response.sendRedirect("priceList");
+    			try {
+        			session.setAttribute("storeid", e.getStoreID());
+        			response.sendRedirect("/software_architecture_cw/store/products");
+    				
+    			}catch(Exception exc) {
+    				exc.printStackTrace();
+    			}
     		}
+    		// HQ staff - can veiw all stores as well as main warehouse
     		else if(e.getAccessLevel() == 3) {
-    			request.setAttribute("message", e.getEmployeeName());
-        		request.getRequestDispatcher("warehouse.jsp").forward(request, response);
+    			try {
+    				request.setAttribute("message", e.getEmployeeName());
+            		request.getRequestDispatcher("warehouse.jsp").forward(request, response);
+    			}catch(Exception exc) {
+    				exc.printStackTrace();
+    			}
     		}
     		
-    	}else {
+    	}
+    	// incorrect details / do not match database 
+    	else {
     		System.out.println(e);
     		request.setAttribute("message", "Data not locate in db please try again");
     		request.getRequestDispatcher("login.jsp").forward(request, response);
     	}
-//    	try {
-//    		response.setContentType("text/html");
-//    		PrintWriter writer = response.getWriter();
-//    		writer.println("<html><body>");
-//    		writer.println("<p>Thank you, " + username + ". You are now logges into the system. </p>");
-//    		String newURL = response.encodeURL("GetSession");
-//    		writer.println("Click <a href=\"" + newURL + "\">here</a> for another Servlet");
-//    		writer.println("</body></html>");
-//    		writer.close();
-//    	}
-//    	catch(Exception e){
-//    		e.printStackTrace();
-//    	}
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 }

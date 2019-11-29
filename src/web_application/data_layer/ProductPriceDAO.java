@@ -5,14 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ProductPriceDAO {
-	List<ProductPrice> productPrices = new ArrayList<ProductPrice>();
 	
-	public int insertProductPrice(ProductPrice p, Integer price);
+	public void updateProductPrice(ProductPrice p, Integer price, String deal);
 	
 	public ProductPrice getProductPrice(Integer productID, Integer storeID);
 	
-	public static List<ProductPrice> getProductPrices() {
+	
+	List<ProductPrice> productPrices = new ArrayList<ProductPrice>();
+	
+	public static List<ProductPrice> getProducts(Integer storeID) {
 		return productPrices;
 	}
+	
+	//List<String> 
 
 }
