@@ -17,6 +17,17 @@
 			<th></th>
 		</thead>
 <tbody>
+<c:choose>
+<c:when test="${lowStockItem.getQuantity() < 10}">
+<div class="alert alert-danger" role="alert">
+  Item: "${lowStockItem.getProductName()}" with 
+  Product ID: ${lowStockItem.getProductID()} is low in stock. 
+  Current stock: ${lowStockItem.getQuantity()}. 
+  Recommended to order more.
+  An email has been sent to manager@management.com .
+</div> 
+</c:when>
+</c:choose>
  <!-- <h2> Product Pricing </h2> -->
  <c:forEach items="${stock}" var="item">
 <tr>

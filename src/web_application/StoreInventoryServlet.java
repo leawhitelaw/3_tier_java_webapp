@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 
+import web_application.data_layer.StoreInventory;
 import web_application.data_layer.StoreInventoryDAOImpl;
 
 /**
@@ -33,6 +35,26 @@ public class StoreInventoryServlet extends HttpServlet {
 			HttpSession session = request.getSession(false);
 			store = (Integer)session.getAttribute("storeid");
 			session.removeAttribute("currentProduct");
+			try {
+				Integer id = Integer.parseInt((String)session.getAttribute("id"));
+				Integer qty = Integer.parseInt((String) session.getAttribute("qty"));
+				//check for request from remove stock servlet and display alert
+				if( id != null && qty != null) {
+					System.out.println("remove " + qty + " of item id: " + id + " from store");
+					session.removeAttribute("id");
+					session.removeAttribute("qty");
+					
+					//get item
+					StoreInventoryDAOImpl sDAO = new StoreInventoryDAOImpl();
+					StoreInventory lowStockItem = new StoreInventory();
+					lowStockItem = sDAO.getProductStock(store, id);
+					request.setAttribute("lowStockItem", lowStockItem);
+					
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 			request.setAttribute("stock", StoreInventoryDAOImpl.getStock(store));
 			System.out.println(StoreInventoryDAOImpl.getStock(store).get(0));
 			request.getRequestDispatcher("/stockList.jsp").forward(request, response);

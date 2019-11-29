@@ -19,16 +19,6 @@
  <c:set var="currentItem" value="${item}" scope="session"/>
  <div class="input-group mb-3">
  <p>Order Quantity: <input type="text" name="orderstock">
-<%--   <div class="input-group-prepend">
-    <label class="input-group-text" for="inputGroupSelect01">Select Deal</label>
-  </div>
-  <select class="custom-select" name="deal">
-    <option selected>${product.getDeal()}</option>
-    <option value="None">None</option>
-    <option value="Buy1Get1Free">Buy1Get1Free</option>
-    <option value="FreeDelivery">FreeDelivery</option>
-    <option value="3For2">3For2</option>
-  </select> --%>
 </div>
  <button type="submit" class="btn btn-info" value="Login">Order Stock</button>
  </form>
