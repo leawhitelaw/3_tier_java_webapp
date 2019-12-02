@@ -14,7 +14,7 @@ import web_application.data_layer.StoreInventory;
 import web_application.data_layer.StoreInventoryDAOImpl;
 
 /**
- * Servlet implementation class DealViewServlet
+ * Servlet displays an individual loyalty deal and allows for the manager to delete it
  */
 @WebServlet("/store/loyalty/deal")
 public class DealViewServlet extends HttpServlet {
@@ -63,9 +63,6 @@ public class DealViewServlet extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			

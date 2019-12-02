@@ -71,8 +71,6 @@ public class GetSession extends HttpServlet {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 //
 //	/**

@@ -7,6 +7,22 @@
 <style><%@include file="css/bootstrap.min.css"%></style>
 <title>Stock List</title>
 <meta charset="UTF-8">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
+  <a class="navbar-brand" href="/software_architecture_cw/store">DE-Store</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/software_architecture_cw/store/products">Pricing</a>
+      <a class="nav-item nav-link" href="/software_architecture_cw/store/stock">Stock</a>
+      <a class="nav-item nav-link" href="/software_architecture_cw/store/loyalty">Loyalty</a>
+      <a class="nav-item nav-link" href="/software_architecture_cw/store/report">Analytics</a>
+      <a class="nav-item nav-link" href="/software_architecture_cw/store/finance">Finance Approval</a>
+      <a class="nav-item nav-link" href="/software_architecture_cw/logout">Log Out</a>
+    </div>
+  </div>
+</nav>
 <div class="container">
 <table class="table table-striped">
 		<caption>Stock</caption>

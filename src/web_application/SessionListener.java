@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSessionListener;
  * Application Lifecycle Listener implementation class SessionListener
  * Listener is solely for logging purposes, only catches two types of session related events (life cycle and attribute)
  * no URL mapping for listeners because they are container wide
+ * Helps with debugging
  *
  */
 @WebListener

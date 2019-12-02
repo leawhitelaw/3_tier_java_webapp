@@ -12,7 +12,7 @@ import web_application.data_layer.ProductPrice;
 import web_application.data_layer.ProductPriceDAOImpl;
 
 /**
- * Servlet implementation class ProductDisplayServlet
+ * Servlet for an individual product, gets product ID from URL params
  */
 @WebServlet("/store/products/product")
 public class ProductDisplayServlet extends HttpServlet {
@@ -25,9 +25,6 @@ public class ProductDisplayServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			//get session info and parameters
@@ -58,9 +55,6 @@ public class ProductDisplayServlet extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			//get session info

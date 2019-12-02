@@ -13,7 +13,7 @@ import web_application.data_layer.StoreInventoryDAO;
 import web_application.data_layer.StoreInventoryDAOImpl;
 
 /**
- * Servlet implementation class RemoveStockServlet
+ * Servlet removes items from stock depending on the URL params (as a prototype to show stock updates)
  */
 @WebServlet("/store/removestock")
 public class RemoveStockServlet extends HttpServlet {
@@ -29,10 +29,13 @@ public class RemoveStockServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
+			//get session info
 			HttpSession session = request.getSession(false);
 			Integer store = (Integer)session.getAttribute("storeid");
+			//get product id and how much to remove
 			String id = request.getParameter("id");
 			String qty = request.getParameter("qty");
+			//set attributes to display in banner
 			session.setAttribute("id", id);
 			session.setAttribute("qty", qty);
 			response.sendRedirect("/software_architecture_cw/store/stock");

@@ -8,46 +8,37 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-import web_application.data_layer.EmployeeDAOImpl;
-
 /**
- * Index page of web application
+ * Servlet implementation class AnalyticsServlet
+ * This servlet displays the analytics reporting in the DE-Store 
  */
-@WebServlet("/store")
-public class StorePageServlet extends HttpServlet {
+@WebServlet("/store/report")
+public class AnalyticsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StorePageServlet() {
+    public AnalyticsServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			//get session details
+			//get store info from session
 			HttpSession session = request.getSession(false);
 			Integer store = (Integer) session.getAttribute("storeid");
-			String employeeID = (String) session.getAttribute("username");
-			String pword = (String) session.getAttribute("password");
-			Integer emplid = Integer.parseInt(employeeID);
+			request.setAttribute("storeID", store);
+			request.setAttribute("graph", "/img/analytics.png");
+			request.getRequestDispatcher("/analytics.jsp").forward(request, response);
 			
-			//create new employee object from DAO implementation
-			EmployeeDAOImpl emplDAOImpl = new EmployeeDAOImpl();
-			//Employee curEmployee = new Employee();
-			request.setAttribute("employee", emplDAOImpl.getEmployee(emplid, pword));
-			request.getRequestDispatcher("store.jsp").forward(request, response);
-		}catch(Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
 		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

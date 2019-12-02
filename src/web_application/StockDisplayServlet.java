@@ -42,7 +42,7 @@ public class StockDisplayServlet extends HttpServlet {
 				System.out.println(storeItem.getProductID());
 				request.setAttribute("nullParams", session.getAttribute("nullParams"));
 				request.setAttribute("orderedQty", session.getAttribute("orderedQty"));
-				request.getRequestDispatcher("/dealView.jsp").forward(request, response);
+				request.getRequestDispatcher("/StockDisplay.jsp").forward(request, response);
 				session.removeAttribute("nullParams");
 				session.removeAttribute("orderedQty");
 				

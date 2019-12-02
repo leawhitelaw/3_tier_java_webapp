@@ -13,7 +13,7 @@ import web_application.data_layer.StoreInventory;
 import web_application.data_layer.StoreInventoryDAOImpl;
 
 /**
- * Servlet implementation class StoreInventoryServlet
+ * Servlet lists all stock information
  */
 @WebServlet("/store/stock")
 public class StoreInventoryServlet extends HttpServlet {
@@ -27,11 +27,10 @@ public class StoreInventoryServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			//get session info
 			HttpSession session = request.getSession(false);
 			store = (Integer)session.getAttribute("storeid");
 			session.removeAttribute("currentProduct");
@@ -56,7 +55,6 @@ public class StoreInventoryServlet extends HttpServlet {
 			}
 			
 			request.setAttribute("stock", StoreInventoryDAOImpl.getStock(store));
-			System.out.println(StoreInventoryDAOImpl.getStock(store).get(0));
 			request.getRequestDispatcher("/stockList.jsp").forward(request, response);
 		}
 		catch(Exception e) {
@@ -64,9 +62,6 @@ public class StoreInventoryServlet extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {		
 			doGet(request, response);

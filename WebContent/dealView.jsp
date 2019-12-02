@@ -10,6 +10,22 @@
 </script>
 <title>Loyalty Deal</title>
 </head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
+  <a class="navbar-brand" href="/software_architecture_cw/store">DE-Store</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/software_architecture_cw/store/products">Pricing</a>
+      <a class="nav-item nav-link" href="/software_architecture_cw/store/stock">Stock</a>
+      <a class="nav-item nav-link" href="/software_architecture_cw/store/loyalty">Loyalty</a>
+      <a class="nav-item nav-link" href="/software_architecture_cw/store/report">Analytics</a>
+      <a class="nav-item nav-link" href="/software_architecture_cw/store/finance">Finance Approval</a>
+      <a class="nav-item nav-link" href="/software_architecture_cw/logout">Log Out</a>
+    </div>
+  </div>
+</nav>
 <div class="container">
 <c:choose>
 	<c:when test="${nullParams == 'yes'}">
@@ -27,12 +43,12 @@
 <h4> Product ID: ${deal.getProductID()}</h4>
 <form action="/software_architecture_cw/store/loyalty/deal" method="POST">
  <p>Current required points: ${deal.getReqPoints()}
- <p>To edit required points enter values for all fields below:
+ <p>Delete Deal?
 <c:set var="currentdeal" value="${deal}" scope="session"/> 
  <div class="input-group mb-3">
- <p>Points: <input type="text" name="points">
+<!--  <p>Points: <input type="text" name="points">
  <p>Deal Name: <input type="text" name="dealName">
-</div>
+</div> -->
  <button type="submit" class="btn btn-danger" value="delete">Delete</button>
  </form>
  </div>

@@ -49,8 +49,9 @@ public class LoginServlet extends HttpServlet {
     		// staff memeber - basic access (can view but cannot edit) own store
     		if(e.getAccessLevel() == 1) {
     			try {
-    				request.setAttribute("message", e.getEmployeeName());
-            		request.getRequestDispatcher("analytics.jsp").forward(request, response);
+    				session.setAttribute("accessLevel", 1);
+    				request.setAttribute("storeid", e.getStoreID());
+    				response.sendRedirect("/software_architecture_cw/store");
     				
     			}catch(Exception exc) {
     				exc.printStackTrace();
@@ -59,6 +60,7 @@ public class LoginServlet extends HttpServlet {
     		// manager - can access and edit own store
     		else if(e.getAccessLevel() == 2) {
     			try {
+    				session.setAttribute("accessLevel", 2);
         			session.setAttribute("storeid", e.getStoreID());
         			response.sendRedirect("/software_architecture_cw/store");
     				
@@ -69,8 +71,9 @@ public class LoginServlet extends HttpServlet {
     		// HQ staff - can veiw all stores as well as main warehouse
     		else if(e.getAccessLevel() == 3) {
     			try {
-    				request.setAttribute("message", e.getEmployeeName());
-            		request.getRequestDispatcher("warehouse.jsp").forward(request, response);
+    				session.setAttribute("accessLevel", 3);
+    				session.setAttribute("storeid", e.getStoreID());
+        			response.sendRedirect("/software_architecture_cw/store");
     			}catch(Exception exc) {
     				exc.printStackTrace();
     			}

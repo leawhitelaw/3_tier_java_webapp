@@ -10,14 +10,16 @@
 </head>
 <body>
 <div class="container">
-	<h1>Login</h1>
+	<h1>DE-Store</h1>
+	<h3>Login</h3>
 	<tr>
 	<td>${message}</td>
 	</tr>
-	<td>Please enter username and password:</td>
+	
+	<p>Please enter Employee ID and Password:
 	<form action="login" method="POST">
 	<div class="form-group col-xs-5">
-		<p>Username: <input type="text" name="username">
+		<p>Employee ID: <input type="text" name="username">
 		<p>Password: <input type="password" name="password">
 	</div>
 	<button type="submit" class="btn btn-info" value="login">Login</button>

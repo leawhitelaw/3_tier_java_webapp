@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import web_application.data_layer.*;
 
 /**
- * Servlet implementation class PriceListServlet
+ * Servlet lists all product price details 
  */
 @WebServlet("/store/products")
 public class PriceListServlet extends HttpServlet {
@@ -33,9 +33,11 @@ public class PriceListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			//get session info
 			HttpSession session = request.getSession(false);
 			store = (Integer)session.getAttribute("storeid");
 			session.removeAttribute("currentProduct");
+			//send products to presentation tier JSP file
 			request.setAttribute("products", ProductPriceDAOImpl.getProducts(store));
 			request.getRequestDispatcher("/priceList.jsp").forward(request, response);
 		}catch(Exception e) {

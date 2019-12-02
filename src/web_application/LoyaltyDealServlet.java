@@ -15,15 +15,13 @@ import web_application.data_layer.LoyaltyDeal;
 import web_application.data_layer.LoyaltyDealDAOImpl;
 
 /**
- * Servlet implementation class LoyaltyDealServlet
+ * Servlet displays all loyalty deals for this current store
  */
 @WebServlet("/store/loyalty")
 public class LoyaltyDealServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    
     public LoyaltyDealServlet() {
         super();
         // TODO Auto-generated constructor stub

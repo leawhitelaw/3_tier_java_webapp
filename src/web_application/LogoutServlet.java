@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
  * logout invalidates current session, which means the server session object is purged
  * prints confirmation and link to login page 
  */
-@WebServlet("/LogoutServlet")
+@WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,20 +26,12 @@ public class LogoutServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		session.invalidate();
 		try {
-			response.setContentType("text/html");
-			PrintWriter writer = response.getWriter();
-			writer.println("<html><body>");
-			writer.println("<p>You have logged out.</p>");
-			writer.println("<p><a href=\"login.jsp\">Return </a> to login page");
-			writer.println("</body><html>");
-			writer.close();
+			HttpSession session = request.getSession();
+			session.invalidate();
+			response.sendRedirect("/software_architecture_cw/login");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
